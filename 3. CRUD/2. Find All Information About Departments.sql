@@ -1,2 +1,2 @@
---Write SQL query to find all Department names.
-SELECT [Name] FROM Departments
+--Write a SQL query to find all available information about the Departments.
+SELECT * FROM Departments
