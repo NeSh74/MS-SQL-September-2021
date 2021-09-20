@@ -1,25 +1,40 @@
-CREATE DATABASE [SoftUni1]
+INSERT INTO 
+	[Towns]
+	([Name])
+	VALUES
+	('Sofia'),
+	('Plovdiv'),
+	('Varna'),
+	('Burgas')
 
-USE [SoftUni1] 
+INSERT INTO 
+	[Addresses]
+	([AddressText], [TownId])
+	VALUES
+	('Prohlada', 1),
+	('Hristo Botev', 2)
 
-CREATE TABLE [Towns]
-					(
-						[Id] INT PRIMARY KEY IDENTITY,
-						[Name] NVARCHAR(50)				NOT NULL
-					)
+INSERT INTO 
+	[Departments]
+	([Name])
+	VALUES
+	('Engineering'),
+	('Marketing'),
+	('Sales'),
+	('Software Development'),
+	('Quality Assurance')
 
-CREATE TABLE [Addresses]
-						(
-							[Id] INT PRIMARY KEY IDENTITY, 
-							[AddressText] NVARCHAR(100) NOT NULL, 
-							[TownId] INT FOREIGN KEY REFERENCES [Towns]([Id]) NOT NULL
-						)
+INSERT INTO 
+	[Employees]
+	([FirstName], [MiddleName], [LastName], [JobTitle], [DepartmentId], [HireDate], [Salary])
+	VALUES
+	('Ivan', 'Ivanov' ,'Ivanov', '.NET Developer', 4, '01/02/2013', 3500.00),
+	('Petar', 'Petrov' ,'Petrov', 'Senior Engineer', 1, '02/03/2004', 4000.00),
+	('Maria', 'Petrova' ,'Ivanova', 'Intern', 5, '28/08/2016', 525.25),
+	('Georgi', 'Teziev' ,'Ivanov', 'CEO', 3, '09/12/2007', 3000.00),
+	('Peter', 'Pan' ,'Pan', 'Intern', 2, '28/08/2016', 599.88)
 
-CREATE TABLE [Departments]
-					(
-						[Id]	INT PRIMARY KEY IDENTITY,
-						[Name]	NVARCHAR(50)				NOT NULL
-					)
+--DROP TABLE [Employees]
 
 CREATE TABLE [Employees]
 					(
@@ -31,5 +46,5 @@ CREATE TABLE [Employees]
 						[DepartmentId] INT FOREIGN KEY REFERENCES [Departments]([Id]) NOT NULL,
 						[HireDate] DATE NOT NULL, 
 						[Salary] DECIMAL(7, 2) NOT NULL, 
-						[AddressId] INT FOREIGN KEY REFERENCES [Addresses]([Id]) NOT NULL
+						[AddressId] INT FOREIGN KEY REFERENCES [Addresses]([Id])
 						)
