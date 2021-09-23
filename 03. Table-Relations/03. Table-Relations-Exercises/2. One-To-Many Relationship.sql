@@ -1,32 +1,33 @@
-CREATE TABLE Manufacturers
-(
-	ManufacturerID	INT PRIMARY KEY,
-	[Name] VARCHAR(50) NOT NULL,
-	EstablishedOn DATE NOT NULL
+--CREATE DATABASE [EntityRelationsDemo2021]
+
+--USE [EntityRelationsDemo2021]
+
+CREATE TABLE [Manufacturers]( 
+			[ManufacturerID] INT PRIMARY KEY IDENTITY NOT NULL, --DEFAULT=>IDENTITY(1, 1)
+		              [Name] VARCHAR(50)			  NOT NULL,
+			 [EstablishedOn] DATE					  NOT NULL
 )
 
-CREATE TABLE Models
-(
-	ModelID INT PRIMARY KEY,
-	[Name] VARCHAR(50) NOT NULL,
-	ManufacturerID INT NOT NULL 
-	FOREIGN KEY REFERENCES Manufacturers(ManufacturerID)
+CREATE TABLE   [Models](
+			  [ModelID] INT PRIMARY KEY IDENTITY(101, 1)							 NOT NULL,
+				 [Name] VARCHAR(50)													 NOT NULL, 
+	   [ManufacturerID] INT FOREIGN KEY REFERENCES [Manufacturers]([ManufacturerID]) NOT NULL
 )
 
-INSERT INTO Manufacturers(ManufacturerID,[Name], EstablishedOn)
-VALUES
-(1, 'BMW', '03/07/1916'),
-(2, 'Tesla', '01/01/2003'),
-(3,'Lada', '05/01/1966')
+INSERT INTO [Manufacturers]([Name], [EstablishedOn])
+	 VALUES
+			('BMW',		'07/03/1916'),
+			('Tesla',	'01/01/2003'),
+			('Lada',	'01/05/1966')
 
-INSERT INTO Models(ModelID, [Name], ManufacturerID)
-VALUES
-(101, 'X1', 1),
-(102, 'i6', 1),
-(103, 'Model S', 2),
-(104, 'Model X', 2),
-(105, 'Model 3', 2),
-(106, 'Nova', 3)
+INSERT INTO [Models]([Name], [ManufacturerID])
+	 VALUES
+			('X1', 1),
+			('i6', 1),
+			('Model S', 2),
+			('Model X',	2),
+			('Model 3', 2),
+			('Nova',	3)
 
 --To see Join
 --SELECT * FROM Manufacturers
