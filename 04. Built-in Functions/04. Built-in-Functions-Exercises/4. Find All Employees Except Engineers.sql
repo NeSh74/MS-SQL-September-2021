@@ -1,4 +1,7 @@
 --USE [SoftUni]
 
-SELECT FirstName, LastName FROM Employees
-WHERE JobTitle NOT LIKE '%engineer%'
+SELECT [FirstName],
+	   [LastName]
+  FROM [Employees]
+ WHERE [JobTitle] NOT LIKE '%engineer%'
+
