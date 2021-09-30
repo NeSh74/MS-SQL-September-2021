@@ -1,12 +1,21 @@
 --USE [SoftUni]
 
-SELECT TOP(3)
-	e.EmployeeID,
-	--ep.EmployeeID,
-	e.FirstName
-	FROM Employees AS e
-LEFT OUTER JOIN EmployeesProjects AS ep
-ON e.EmployeeID = ep.EmployeeID
-WHERE ep.ProjectID IS NULL
---WHERE ep.EmployeeID IS NULL
-ORDER BY e.EmployeeID 
+    SELECT 
+		   TOP(3)
+	       e.[EmployeeID],
+		   e.[FirstName]		  		  
+	  FROM [Employees] AS e
+	  LEFT JOIN [EmployeesProjects] AS ep
+		ON e.[EmployeeID] = ep.[EmployeeID]
+	 WHERE ep.[ProjectID] IS NULL
+  ORDER BY e.[EmployeeID]	
+  
+  --SELECT 
+		--   TOP(3)
+	 --      [EmployeeID],
+		--   [FirstName]		  		  
+	 -- FROM [Employees] 
+	 --WHERE [EmployeeID] NOT IN 
+  -- (SELECT [EmployeeID] 
+  --    FROM [EmployeesProjects])
+  --ORDER BY [EmployeeID]	
