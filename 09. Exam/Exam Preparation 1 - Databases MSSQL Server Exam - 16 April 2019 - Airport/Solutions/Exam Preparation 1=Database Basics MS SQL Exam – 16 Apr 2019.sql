@@ -1,4 +1,4 @@
-﻿--CREATE DATABASE [Airport]
+--CREATE DATABASE [Airport]
 
 --USE [Airport]
 
@@ -42,14 +42,13 @@ CREATE TABLE [Luggages](
 
 CREATE TABLE [Tickets](
 [Id] INT PRIMARY KEY IDENTITY,
-[PassеngerId] INT FOREIGN KEY REFERENCES [Passengers]([Id]) NOT NULL,
+[PassengerId] INT FOREIGN KEY REFERENCES [Passengers]([Id]) NOT NULL,
 [FlightId] INT FOREIGN KEY REFERENCES [Flights]([Id]) NOT NULL,
 [LuggageId] INT FOREIGN KEY REFERENCES [Luggages]([Id]) NOT NULL,
 [Price] DECIMAL (15, 2) NOT NULL
 )
 
 --2. Insert
-
 INSERT INTO [Planes]([Name], [Seats], [Range])
 VALUES
 ('Airbus 336',	112,	5132),
@@ -126,14 +125,14 @@ SELECT
 	GROUP BY [FlightId]
 	ORDER BY SUM([Price]) DESC, [FlightId]
 
---7.1. Passenger Trips
+	--7.1. Passenger Trips
 
 SELECT CONCAT(p.[FirstName], ' ', p.[LastName]) AS [Full Name],
 f.[Origin],
 f.[Destination]
 FROM [Passengers] AS p
 INNER JOIN [Tickets] AS t
-ON t.[PassеngerId] = p.[Id]
+ON t.[PassengerId] = p.[Id]
 INNER JOIN [Flights] AS f
 ON t.[FlightId] = f.[Id]
 ORDER BY [Full Name], f.[Origin], f.[Destination]
@@ -156,7 +155,7 @@ SELECT p.[FirstName] AS [First Name] ,
 	   p.[Age]  
 FROM [Passengers] AS p
 LEFT JOIN [Tickets] AS t
-ON p.[Id] = t.[PassеngerId]
+ON p.[Id] = t.[PassengerId]
 WHERE t.[Id] IS NULL
 ORDER BY p.[Age] DESC, [First Name], [Last Name]
 
@@ -168,7 +167,7 @@ SELECT CONCAT(p.[FirstName], ' ', p.[LastName]) AS [Full Name],
 	         lt.[Type] AS [Luggage Type]
 FROM [Passengers] AS p
 INNER JOIN [Tickets] AS t
-ON t.[PassеngerId] = p.[Id]
+ON t.[PassengerId] = p.[Id]
 INNER JOIN [Flights] AS f
 ON t.[FlightId] = f.[Id]
 INNER JOIN [Planes] AS pl
@@ -198,14 +197,16 @@ SELECT
 
 SELECT pl.[Name],
 	   pl.[Seats],
-	   COUNT(t.[PassеngerId]) AS [Passengers Count]
+	   COUNT(t.[PassengerId]) 
+	   AS [Passengers Count]
 FROM [Planes] AS pl
 LEFT JOIN [Flights] AS f
-ON pl.[Id] = f.[Id]
+ON pl.[Id] = f.[PlaneId]
 LEFT JOIN [Tickets] AS t
 ON f.[Id] = t.[FlightId]
 GROUP BY pl.[Name], pl.[Seats]
-ORDER BY [Passengers Count] DESC, [Name], [Seats]
+ORDER BY [Passengers Count] DESC, 
+		 [Name], [Seats]
 
 --11.	Vacation
 
